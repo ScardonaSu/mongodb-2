@@ -1,0 +1,297 @@
+db.createCollection("deleteUpdates");
+
+use("deleteUpdates")
+
+db.deleteUpdates.insertMany([
+    {
+      nombres: "Alejandra",
+      apellidos: "González",
+      correo: "alejandra@example.com",
+      ciudad: "Ciudad de México",
+      país: "México",
+      salario: 52000,
+      edad: 29,
+      altura: 165,
+      peso: 135
+    },
+    {
+      nombres: "Mario",
+      apellidos: "Herrera",
+      correo: "mario@example.com",
+      ciudad: "Bogotá",
+      país: "Colombia",
+      salario: 48000,
+      edad: 31,
+      altura: 175,
+      peso: 160
+    },
+    {
+      nombres: "Carolina",
+      apellidos: "Jiménez",
+      correo: "carolina@example.com",
+      ciudad: "Lima",
+      país: "Perú",
+      salario: 55000,
+      edad: 27,
+      altura: 160,
+      peso: 125
+    },
+    {
+      nombres: "Gabriel",
+      apellidos: "Ramírez",
+      correo: "gabriel@example.com",
+      ciudad: "Santiago",
+      país: "Chile",
+      salario: 42000,
+      edad: 33,
+      altura: 175,
+      peso: 170
+    },
+    {
+      nombres: "Paula",
+      apellidos: "Vargas",
+      correo: "paula@example.com",
+      ciudad: "Buenos Aires",
+      país: "Argentina",
+      salario: 60000,
+      edad: 30,
+      altura: 170,
+      peso: 140
+    },
+    {
+      nombres: "Sergio",
+      apellidos: "Santos",
+      correo: "sergio@example.com",
+      ciudad: "Caracas",
+      país: "Venezuela",
+      salario: 51000,
+      edad: 32,
+      altura: 178,
+      peso: 155
+    },
+    {
+      nombres: "Elena",
+      apellidos: "Suárez",
+      correo: "elena@example.com",
+      ciudad: "Lima",
+      país: "Perú",
+      salario: 49000,
+      edad: 29,
+      altura: 165,
+      peso: 135
+    },
+    {
+      nombres: "Francisco",
+      apellidos: "Gómez",
+      correo: "francisco@example.com",
+      ciudad: "Montevideo",
+      país: "Uruguay",
+      salario: 53000,
+      edad: 34,
+      altura: 180,
+      peso: 165
+    },
+    {
+      nombres: "Laura",
+      apellidos: "Torres",
+      correo: "laura.torres@example.com",
+      ciudad: "Medellín",
+      país: "Colombia",
+      salario: 47000,
+      edad: 28,
+      altura: 165,
+      peso: 150
+    },
+    {
+      nombres: "Miguel",
+      apellidos: "Martín",
+      correo: "miguel@example.com",
+      ciudad: "Madrid",
+      país: "España",
+      salario: 58000,
+      edad: 31,
+      altura: 175,
+      peso: 160
+    }
+  ])
+
+
+
+//! Operaciones de Eliminación
+
+db.deleteUpdates.insert([
+    
+        {
+        nombres: "Fernando",
+        apellidos: "Gomez",
+        correo: "miguel@example.com",
+        ciudad: "Bello",
+        país: "Colombia",
+        salario: 58000,
+        edad: 23,
+        altura: 175,
+        peso: 160,
+        estadoCivil: "Soltero"
+      }
+
+    ])
+
+
+// Eliminar todos los usuarios que tienen un salario menor que 2000 dólares.
+
+db.deleteUpdates.deleteOne({ salario: { $lt: 45000 } })
+
+
+// Eliminar usuarios que tienen una edad menor que 25 años.
+
+db.deleteUpdates.deleteOne({edad:{$lte: 25}})
+
+// Borrar todos los usuarios que viven en "París".
+
+db.deleteUpdates.deleteOne({país: {$eq: "España"}})
+
+
+// Eliminar usuarios que tienen un peso superior a 180 libras.
+
+db.deleteUpdates.deleteOne({peso: {$gt: 180}})
+
+
+// Eliminar usuarios que tienen una altura inferior a 160 centímetros.
+
+db.deleteUpdates.deleteOne({altura: {$lt: 160}})
+
+// Eliminar todos los usuarios que tienen el nombre "John" y el apellido "Doe".
+
+db.deleteUpdates.deleteOne({nombres: {$in: ["Miguel", "Laura"]}})
+
+// Borrar usuarios que tienen una dirección de correo electrónico específica, por ejemplo, "borrar@riwi.com".
+
+db.deleteUpdates.deleteOne({correo: {$regex: /@gmail\.com$/}})
+
+
+// Eliminar usuarios que no tienen una dirección de correo electrónico registrada.
+
+db.deleteUpdates.deleteOne({correo: {$exists: false}})
+
+// Eliminar usuarios que viven en "Tokyo".
+
+db.deleteUpdates.deleteOne({país: {$in: ["Uruguay"]}})
+
+// Borrar todos los usuarios que son menores de 18 años.
+
+db.deleteUpdates.deleteOne({edades: {$lte: 18}})
+
+// Eliminar usuarios que tienen un salario igual a 0.
+
+db.deleteUpdates.deleteOne({salario: {$eq: 0}})
+
+// Borrar usuarios que viven en "New York" y tienen un salario superior a 5000 dólares.
+
+db.deleteUpdates.deleteOne({
+    $and:[
+        {país: {$eq: "Colombia"}},
+        {salario: {$gte: 50000}}
+    ]
+})
+
+// Eliminar usuarios que tienen una dirección de correo electrónico que contiene la palabra "spam".
+db.deleteUpdates.deleteOne({correo: {$regex: /spam/i }})
+
+// Borrar usuarios que viven en "Bello" y tienen más de 50 años.
+
+db.deleteUpdates.deleteOne({
+    $and:[
+        {ciudad: {$eq: "Medellin"}},
+        {edades: {$gte: 50}}
+    ]
+})
+
+// Eliminar todos los usuarios que tienen el apellido "González".
+
+db.deleteUpdates.deleteOne({apellidos: {$eq: "González"}})
+
+// Borrar usuarios que tienen una edad superior a 70 años.
+
+db.deleteUpdates.deleteOne({edades: {$gte: 70}})
+
+// Eliminar usuarios que tienen un país de residencia igual a "Canadá" y un salario inferior a 4000 dólares.
+
+db.deleteUpdates.deleteOne({
+    $and: [
+        {país: {$eq: "canad"}},
+        {salario: {$gte: 40000}}
+    ]
+})
+
+// Borrar usuarios que tienen un salario entre 1000 y 2000 dólares.
+
+db.deleteUpdates.deleteOne({salario: {$gte: 20000, $lte: 50000}})
+
+// Eliminar usuarios que tienen una edad igual a 30 años.
+
+db.deleteUpdates.deleteOne({edades: {$gte: 30}})
+
+// Borrar usuarios que tienen una altura superior a 190 centímetros.
+
+db.deleteUpdates.deleteOne({altura: {$gte: 190}})
+
+
+
+
+//! UPDATE
+
+db.deleteUpdates.find()
+
+// Incrementar el salario de todos los usuarios en un 10%.
+
+db.deleteUpdates.updateMany(
+    {},
+    { $mul: { salario: 1.1 } }
+  )
+
+
+
+
+
+// Cambiar la ciudad de residencia de los usuarios que actualmente viven en "New York" a "Los Ángeles".
+
+
+
+// Agregar el correo electrónico "nuevo@riwi.com" al usuario con nombre "Juan" y apellido "Perez".
+
+// Actualizar la edad del usuario con correo electrónico "ejemplo@riwi.es" a 35 años.
+
+// Cambiar el país de residencia de los usuarios que son de "Mexico" a "Canada".
+
+// Aumentar la altura de todos los usuarios en 5 centímetros.
+
+// Cambiar el apellido del usuario con correo electrónico "otro@riwi.net" a "González".
+
+// Actualizar el peso del usuario con nombre "Maria" a 140 libras.
+
+// Incrementar el salario de todos los usuarios que son de "Estados Unidos" en un 15%.
+
+// Actualizar el correo electrónico del usuario con nombre "Pedro" a "nuevo_correo@riwi.co".
+
+// Cambiar la edad de todos los usuarios menores de 30 años a 30 años.
+
+// Incrementar el salario de los usuarios que tienen un salario inferior a 3000 dólares en un 20%.
+
+// Actualizar la ciudad de residencia de todos los usuarios que actualmente viven en "Bogotá" a "Medellín".
+
+// Cambiar el país de residencia de los usuarios con un salario superior a 5000 dólares a "Australia".
+
+// Reducir la edad de todos los usuarios que tienen más de 50 años en 5 años.
+
+// Actualizar el peso de los usuarios que pesan más de 200 libras a 180 libras.
+
+// Incrementar el salario de los usuarios que viven en "London" en un 25%.
+
+// Cambiar el apellido de los usuarios con un salario superior a 4000 dólares a "Smith".
+
+// Actualizar el correo electrónico de todos los usuarios cuyo nombre empiece por "A" a "nuevo@riwi.es".
+
+// Cambiar la ciudad de residencia de los usuarios con una altura inferior a 160 centímetros a "París".
+
+
+
